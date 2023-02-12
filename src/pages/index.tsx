@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client';
+import moment from 'moment';
 import Link from 'next/link';
 import * as React from 'react';
 
@@ -28,12 +29,17 @@ export interface PostReportResponse {
   posts: PostConnection;
 }
 
+export interface ContentSource {
+  id: string;
+  name: string;
+}
 export interface Post {
   id: string;
   title: string;
   link: string;
   summary: string;
-  publishedAt: string;
+  publishedAt: Date;
+  contentSource: ContentSource;
 }
 
 export default function HomePage({ posts }: { posts: PostReportResponse }) {
@@ -67,10 +73,13 @@ export default function HomePage({ posts }: { posts: PostReportResponse }) {
                           {post.node.title}
                         </Link>
                       </h2>
-                      {/* <FormattedDate
-                       date={date}
-                       className="order-first font-mono text-sm leading-7 text-slate-500"
-                     /> */}
+                      <div className='fex justify-end'>
+                        <time className='text-right-xs font-mono leading-7 text-slate-500'>
+                          {moment(post.node.publishedAt).format(
+                            'DD/MM/YYYY HH:mm'
+                          )}
+                        </time>
+                      </div>
                       <p className='mt-1 text-base leading-7 text-slate-700'>
                         {post.node.summary}
                       </p>
@@ -79,7 +88,7 @@ export default function HomePage({ posts }: { posts: PostReportResponse }) {
                           aria-hidden='true'
                           className='text-sm font-bold text-slate-400'
                         >
-                          /
+                          -
                         </span>
                         <Link
                           href={post.node.link}
@@ -87,7 +96,7 @@ export default function HomePage({ posts }: { posts: PostReportResponse }) {
                           aria-label={`Saiba mais ${post.node.title}`}
                           target='_blank'
                         >
-                          saiba mais
+                          saiba mais no {post.node.contentSource.name}
                         </Link>
                       </div>
                     </div>
