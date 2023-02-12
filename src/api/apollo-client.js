@@ -1,7 +1,7 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 
 const client = new ApolloClient({
-  uri: 'https://app.lucio.run/graphql',
+  uri: 'https://app.ivai.news/graphql',
   cache: new InMemoryCache(),
 });
 
