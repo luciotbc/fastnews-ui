@@ -73,7 +73,7 @@ export default function HomePage({ posts }: { posts: PostReportResponse }) {
                           {post.node.title}
                         </Link>
                       </h2>
-                      <div className='fex justify-end'>
+                      <div>
                         <time className='text-right-xs font-mono leading-7 text-slate-500'>
                           {moment(post.node.publishedAt).format(
                             'DD/MM/YYYY HH:mm'
