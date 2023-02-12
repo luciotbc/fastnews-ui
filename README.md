@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e0f0a0b6-d408-476f-ab50-5c357f4ce83a/deploy-status)](https://app.netlify.com/sites/ivainews/deploys)
+
 # Next.js + Tailwind CSS + TypeScript Starter and Boilerplate
 
 <div align="center">

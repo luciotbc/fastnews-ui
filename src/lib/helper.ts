@@ -10,8 +10,8 @@ export function openGraph({
   siteName,
   templateTitle,
   description,
-}: // logo = 'https://og.<your-domain>/images/logo.jpg',
-OpenGraphType): string {
+  logo = 'https://og.ivai.news/images/logo.jpg',
+}: OpenGraphType): string {
   const ogLogo = encodeURIComponent(logo);
   const ogSiteName = encodeURIComponent(siteName.trim());
   const ogTemplateTitle = templateTitle
@@ -19,7 +19,7 @@ OpenGraphType): string {
     : undefined;
   const ogDesc = encodeURIComponent(description.trim());
 
-  return `https://og.<your-domain>/api/general?siteName=${ogSiteName}&description=${ogDesc}&logo=${ogLogo}${
+  return `https://og.ivai.news/api/general?siteName=${ogSiteName}&description=${ogDesc}&logo=${ogLogo}${
     ogTemplateTitle ? `&templateTitle=${ogTemplateTitle}` : ''
   }`;
 }
