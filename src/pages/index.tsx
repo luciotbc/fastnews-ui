@@ -47,7 +47,7 @@ export default function HomePage({ posts }: { posts: PostReportResponse }) {
           <div className='lg:max-w-4xl'>
             <div className='mx-auto px-4 sm:px-6 md:max-w-2xl md:px-4 lg:px-0'>
               <h1 className='text-2xl font-bold leading-7 text-slate-900'>
-                Fast news
+                Ivaí.news
               </h1>
             </div>
             <div className='mx-auto px-4 sm:px-6 md:max-w-2xl md:px-4 lg:px-0'>
