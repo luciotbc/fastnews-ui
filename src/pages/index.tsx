@@ -1,74 +1,146 @@
+import { gql } from '@apollo/client';
+import Link from 'next/link';
 import * as React from 'react';
 
 import Layout from '@/components/layout/Layout';
-import ArrowLink from '@/components/links/ArrowLink';
-import ButtonLink from '@/components/links/ButtonLink';
-import UnderlineLink from '@/components/links/UnderlineLink';
-import UnstyledLink from '@/components/links/UnstyledLink';
 import Seo from '@/components/Seo';
 
-/**
- * SVGR Support
- * Caveat: No React Props Type.
- *
- * You can override the next-env if the type is important to you
- * @see https://stackoverflow.com/questions/68103844/how-to-override-next-js-svg-module-declaration
- */
-import Vercel from '~/svg/Vercel.svg';
+import client from '@/api/apollo-client';
 
-// !STARTERCONF -> Select !STARTERCONF and CMD + SHIFT + F
-// Before you begin editing, follow all comments with `STARTERCONF`,
-// to customize the default configuration.
+export interface PageInfo {
+  startCursor: string;
+  endCursor: string;
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
+}
 
-export default function HomePage() {
+export interface PostNode {
+  node: Post;
+}
+
+export interface PostConnection {
+  totalCount: number;
+  edges: PostNode[];
+  pageInfo: PageInfo;
+}
+
+export interface PostReportResponse {
+  posts: PostConnection;
+}
+
+export interface Post {
+  id: string;
+  title: string;
+  link: string;
+  summary: string;
+  publishedAt: string;
+}
+
+export default function HomePage({ posts }: { posts: PostReportResponse }) {
   return (
     <Layout>
       {/* <Seo templateTitle='Home' /> */}
       <Seo />
 
-      <main>
-        <section className='bg-white'>
-          <div className='layout relative flex min-h-screen flex-col items-center justify-center py-12 text-center'>
-            <Vercel className='text-5xl' />
-            <h1 className='mt-4'>
-              Next.js + Tailwind CSS + TypeScript Starter
-            </h1>
-            <p className='mt-2 text-sm text-gray-800'>
-              A starter for Next.js, Tailwind CSS, and TypeScript with Absolute
-              Import, Seo, Link component, pre-configured with Husky{' '}
-            </p>
-            <p className='mt-2 text-sm text-gray-700'>
-              <ArrowLink href='https://github.com/theodorusclarence/ts-nextjs-tailwind-starter'>
-                See the repository
-              </ArrowLink>
-            </p>
-
-            <ButtonLink className='mt-6' href='/components' variant='light'>
-              See all components
-            </ButtonLink>
-
-            <UnstyledLink
-              href='https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Ftheodorusclarence%2Fts-nextjs-tailwind-starter'
-              className='mt-4'
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                width='92'
-                height='32'
-                src='https://vercel.com/button'
-                alt='Deploy with Vercel'
-              />
-            </UnstyledLink>
-
-            <footer className='absolute bottom-2 text-gray-700'>
-              © {new Date().getFullYear()} By{' '}
-              <UnderlineLink href='https://theodorusclarence.com?ref=tsnextstarter'>
-                Theodorus Clarence
-              </UnderlineLink>
-            </footer>
+      <main className='border-slate-200'>
+        <div className='pt-8 pb-12 sm:pb-4 lg:pt-12'>
+          <div className='lg:max-w-4xl'>
+            <div className='mx-auto px-4 sm:px-6 md:max-w-2xl md:px-4 lg:px-0'>
+              <h1 className='text-2xl font-bold leading-7 text-slate-900'>
+                Fast news
+              </h1>
+            </div>
+            <div className='mx-auto px-4 sm:px-6 md:max-w-2xl md:px-4 lg:px-0'>
+              <div className='divide-y divide-slate-100 sm:mt-4 lg:mt-8 lg:border-t lg:border-slate-100'>
+                {posts.posts.edges.map((post) => (
+                  <article
+                    key={`post-${post.node.id}-title`}
+                    aria-label={`post-${post.node.id}-title`}
+                    className='py-10 sm:py-12'
+                  >
+                    <div className='flex flex-col items-start'>
+                      <h2
+                        id={`episode-${post.node.id}-title`}
+                        className='mt-2 text-lg font-bold text-slate-900'
+                      >
+                        <Link href={post.node.link} target='_blank'>
+                          {post.node.title}
+                        </Link>
+                      </h2>
+                      {/* <FormattedDate
+                       date={date}
+                       className="order-first font-mono text-sm leading-7 text-slate-500"
+                     /> */}
+                      <p className='mt-1 text-base leading-7 text-slate-700'>
+                        {post.node.summary}
+                      </p>
+                      <div className='mt-4 flex items-center gap-4'>
+                        <span
+                          aria-hidden='true'
+                          className='text-sm font-bold text-slate-400'
+                        >
+                          /
+                        </span>
+                        <Link
+                          href={post.node.link}
+                          className='flex items-center text-sm font-bold leading-6 text-pink-500 hover:text-pink-700 active:text-pink-900'
+                          aria-label={`Saiba mais ${post.node.title}`}
+                          target='_blank'
+                        >
+                          saiba mais
+                        </Link>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
           </div>
-        </section>
+        </div>
       </main>
     </Layout>
   );
+}
+
+export async function getStaticProps(): Promise<{
+  props: { posts: PostReportResponse };
+}> {
+  const { data } = await client.query({
+    query: gql`
+      query posts {
+        posts {
+          edges {
+            node {
+              id
+              title
+              link
+              summary
+              publishedAt
+              author
+              contentSource {
+                name
+                url
+                bio
+                __typename
+              }
+              __typename
+            }
+            __typename
+          }
+          pageInfo {
+            startCursor
+            endCursor
+            hasNextPage
+            hasPreviousPage
+            __typename
+          }
+        }
+      }
+    `,
+  });
+  return {
+    props: {
+      posts: data || [],
+    },
+  };
 }
