@@ -111,7 +111,7 @@ export default function HomePage({ posts }: { posts: PostReportResponse }) {
   );
 }
 
-export async function getStaticProps(): Promise<{
+export async function getServerSideProps(): Promise<{
   props: { posts: PostReportResponse };
 }> {
   const { data } = await client.query({
