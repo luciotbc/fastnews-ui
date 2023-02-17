@@ -4,15 +4,11 @@ import { useRouter } from 'next/router';
 const defaultMeta = {
   title: 'Ivaí news',
   siteName: 'Ivaí news',
-  description: 'Resumo das principais notícias do Vale do Ivaí e região',
+  description: 'Todas as notícias do Vale do Ivaí e região',
   url: 'https://ivai.news',
   type: 'website',
   robots: 'follow, index',
-  /**
-   * No need to be filled, will be populated with openGraph function
-   * If you wish to use a normal image, just specify the path below
-   */
-  // image: 'https://tsnext-tw.thcl.dev/images/large-og.png',
+  image: 'https://ivai.news/images/large-og.png',
 };
 
 type SeoProps = {
@@ -109,7 +105,7 @@ const favicons: Array<React.ComponentPropsWithoutRef<'link'>> = [
   {
     rel: 'mask-icon',
     href: '/favicon/safari-pinned-tab.svg',
-    color: '#00e887',
+    color: '#333333',
   },
   { rel: 'shortcut icon', href: '/favicon/favicon.ico' },
 ];
