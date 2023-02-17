@@ -1,9 +1,12 @@
+import { gql } from '@apollo/client';
 import moment from 'moment';
 import Link from 'next/link';
 import * as React from 'react';
 
 import Layout from '@/components/layout/Layout';
 import Seo from '@/components/Seo';
+
+import client from '@/api/apollo-client';
 
 export interface PageInfo {
   startCursor: string;
@@ -109,4 +112,44 @@ export default function HomePage({ posts }: { posts: PostReportResponse }) {
       </main>
     </Layout>
   );
+}
+
+export async function getServerSideProps(): Promise<{
+  props: { posts: PostReportResponse };
+}> {
+  const { data } = await client.query({
+    query: gql`
+      query posts {
+        posts {
+          edges {
+            node {
+              id
+              author
+              body
+              link
+              publishedAt
+              summary
+              title
+              contentSource {
+                name
+                url
+                bio
+              }
+            }
+          }
+          pageInfo {
+            startCursor
+            endCursor
+            hasNextPage
+            hasPreviousPage
+          }
+        }
+      }
+    `,
+  });
+  return {
+    props: {
+      posts: data || [],
+    },
+  };
 }
