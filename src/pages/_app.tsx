@@ -5,6 +5,7 @@ import Head from 'next/head'
 import { ThemeProvider } from 'next-themes'
 
 import Analytics from '@/components/analytics'
+import LayoutWrapper from '@/components/LayoutWrapper'
 import siteMetadata from '@/data/siteMetadata'
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -14,7 +15,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta content="width=device-width, initial-scale=1" name="viewport" />
       </Head>
       <Analytics />
-      <Component {...pageProps} />
+      <LayoutWrapper>
+        <Component {...pageProps} />
+      </LayoutWrapper>
     </ThemeProvider>
   )
 }
