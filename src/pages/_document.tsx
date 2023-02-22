@@ -6,7 +6,6 @@ export default function Document() {
   return (
     <Html lang="pt" className="scroll-smooth">
       <Head>
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta name="description" content={siteMetadata.description} />
 
         <meta name="msapplication-TileColor" content="#000000" />
