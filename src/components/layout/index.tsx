@@ -1,10 +1,10 @@
 import React from 'react'
 
+import SectionContainer from '../SectionContainer'
 import Footer from './Footer'
 import Header from './Header'
-import SectionContainer from './SectionContainer'
 
-const LayoutWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <SectionContainer>
       <div className="flex h-screen flex-col justify-between">
@@ -16,4 +16,4 @@ const LayoutWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) =>
   )
 }
 
-export default LayoutWrapper
+export default Layout
