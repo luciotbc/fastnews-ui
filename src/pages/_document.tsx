@@ -17,7 +17,7 @@ export default function Document() {
         <link rel="manifest" href="/static/favicons/site.webmanifest" />
         <link rel="mask-icon" href="/static/favicons/safari-pinned-tab.svg" color="#fff" />
       </Head>
-      <body className="bg-white text-black antialiased dark:bg-gray-900 dark:text-white">
+      <body className="bg-white text-black antialiased dark:bg-neutral-900 dark:text-white">
         <Main />
         <NextScript />
       </body>

@@ -10,7 +10,7 @@ export default function Home() {
       </Head>
       <main>
         <div>
-          <h1 className="text-3xl font-bold text-indigo-600 underline">Teste tailwind</h1>
+          <h1 className="text-3xl font-bold text-indigo-600 dark:text-white">Teste tailwind</h1>
           <p>
             Get started by editing&nbsp;
             <code>src/pages/index.tsx</code>

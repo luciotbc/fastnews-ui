@@ -4,6 +4,10 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
+  corePlugins: {
+    aspectRatio: false,
+  },
+  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
@@ -15,9 +19,6 @@ module.exports = {
         120: '30rem',
       },
     },
-  },
-  corePlugins: {
-    aspectRatio: false,
   },
   plugins: [
     require('@tailwindcss/aspect-ratio'),

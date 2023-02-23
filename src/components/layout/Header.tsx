@@ -1,46 +1,56 @@
-// import headerNavLinks from '@/data/headerNavLinks'
-// import Logo from '@/data/logo.svg'
-// import siteMetadata from '@/data/siteMetadata'
-// import Link from './Link'
-// import MobileNav from './MobileNav'
-// import ThemeSwitch from './ThemeSwitch'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useTheme } from 'next-themes'
+import { useEffect, useState } from 'react'
+
+import ThemeSwitch from './ThemeSwitch'
 
 const Header: React.FC = () => {
+  const [mounted, setMounted] = useState(false)
+  const { theme } = useTheme()
+
+  useEffect(() => setMounted(true), [])
+
   return (
-    //   <header className="flex items-center justify-between py-10">
-    //   <div>
-    //     <Link href="/" aria-label={siteMetadata.headerTitle}>
-    //       <div className="flex items-center justify-between">
-    //         <div className="mr-3">
-    //           <Logo />
-    //         </div>
-    //         {typeof siteMetadata.headerTitle === 'string' ? (
-    //           <div className="hidden h-6 text-2xl font-semibold sm:block">
-    //             {siteMetadata.headerTitle}
-    //           </div>
-    //         ) : (
-    //           siteMetadata.headerTitle
-    //         )}
-    //       </div>
-    //     </Link>
-    //   </div>
-    //   <div className="flex items-center text-base leading-5">
-    //     <div className="hidden sm:block">
-    //       {headerNavLinks.map((link) => (
-    //         <Link
-    //           key={link.title}
-    //           href={link.href}
-    //           className="p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4"
-    //         >
-    //           {link.title}
-    //         </Link>
-    //       ))}
-    //     </div>
-    //     <ThemeSwitch />
-    //     <MobileNav />
-    //   </div>
-    // </header>
-    <h1>Header</h1>
+    <header>
+      <nav
+        className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
+        aria-label="Global"
+      >
+        <div className="flex flex-1">
+          <div className="flex lg:hidden"></div>
+        </div>
+        <Link href="/" className="-m-1.5 p-1.5">
+          <span className="sr-only">Your Company</span>
+          {mounted && theme === 'dark' ? (
+            <Image
+              src="/static/images/logo_white.png"
+              alt="Ivaí.news Logo"
+              width={133}
+              height={60}
+              style={{
+                width: '100%',
+                height: 'auto',
+              }}
+            />
+          ) : (
+            <Image
+              src="/static/images/logo.png"
+              alt="Ivaí.news Logo"
+              width={133}
+              height={60}
+              style={{
+                width: '100%',
+                height: 'auto',
+              }}
+            />
+          )}
+        </Link>
+        <div className="flex flex-1 justify-end">
+          <ThemeSwitch />
+        </div>
+      </nav>
+    </header>
   )
 }
 
