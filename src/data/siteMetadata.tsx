@@ -1,6 +1,7 @@
 const siteMetadata = {
   title: 'Ivaí.news',
   author: 'Lúcio Charallo',
+  authorUrl: 'https://lucio.app/',
   headerTitle: 'Ivaí.news',
   description: 'Todas as notícias Vale do Ivaí e região',
   language: 'pt-br',
