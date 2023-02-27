@@ -31,4 +31,5 @@ export interface IPost {
   publishedAt: Date
   summary: string
   title: string
+  imageUrl: string | null
 }

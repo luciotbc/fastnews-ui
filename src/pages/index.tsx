@@ -39,6 +39,7 @@ export async function getServerSideProps(): Promise<{
               publishedAt
               summary
               title
+              imageUrl
               contentSource {
                 name
                 url
