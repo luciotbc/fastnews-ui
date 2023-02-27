@@ -1,0 +1,17 @@
+#import './postFragment.graphql'
+
+query posts {
+  posts {
+    edges {
+      node {
+        ...PostFragment
+      }
+    }
+    pageInfo {
+      startCursor
+      endCursor
+      hasNextPage
+      hasPreviousPage
+    }
+  }
+}
