@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { IPost } from '@/interfaces'
+import formatDate from '@/lib/utils/formatDate'
 
 const Post = (props: { post: IPost }): JSX.Element => {
   const { post } = props
@@ -14,7 +15,7 @@ const Post = (props: { post: IPost }): JSX.Element => {
           <div>
             <h2 className="text-2xl font-bold leading-8 tracking-tight">
               <Link
-                className=" visited:text-purple-600 hover:text-pink-700 active:text-pink-900"
+                className=" visited:text-gray-300 hover:text-pink-700 active:text-pink-900"
                 href={post.link || '/'}
                 target="_blank"
                 aria-label={`Leia mais "${post.title}"`}
@@ -25,6 +26,9 @@ const Post = (props: { post: IPost }): JSX.Element => {
           </div>
           <div className="prose max-w-none text-gray-500 line-clamp-3 dark:text-gray-400">
             {post.body}
+          </div>
+          <div className="text-right text-sm text-gray-500 line-clamp-3 dark:text-gray-400">
+            {`publicado ${formatDate(post.publishedAt)}`}
           </div>
           {post.imageUrl && (
             <Image
@@ -45,7 +49,7 @@ const Post = (props: { post: IPost }): JSX.Element => {
               className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
               aria-label={`Leia mais "${post.title}"`}
             >
-              Leia mais &rarr;
+              Leia mais no {post.contentSource.name} &rarr;
             </Link>
           </div>
         </div>
