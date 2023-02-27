@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 
 import { IPost } from '@/interfaces'
@@ -25,6 +26,18 @@ const Post = (props: { post: IPost }): JSX.Element => {
           <div className="prose max-w-none text-gray-500 line-clamp-3 dark:text-gray-400">
             {post.body}
           </div>
+          {post.imageUrl && (
+            <Image
+              src={post.imageUrl}
+              alt="Ivaí.news Logo"
+              width={300}
+              height={300}
+              style={{
+                width: '100%',
+                height: 'auto',
+              }}
+            />
+          )}
           <div className="text-base font-medium leading-6">
             <Link
               href={post.link || '/'}
