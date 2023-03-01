@@ -15,7 +15,7 @@ export interface IPostConnection {
   pageInfo: IPageInfo
 }
 
-export interface IPostReportResponse {
+export interface IPostsResponse {
   posts: IPostConnection
 }
 

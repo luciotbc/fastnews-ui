@@ -1,7 +1,7 @@
 #import './postFragment.graphql'
 
-query posts {
-  posts {
+query posts($first: Int, $after: String, $last: Int, $before: String) {
+  posts(first: $first, after: $after, last: $last, before: $before) {
     edges {
       node {
         ...PostFragment

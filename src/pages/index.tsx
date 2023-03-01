@@ -1,12 +1,12 @@
 import Head from 'next/head'
 
-import client from '@/api/apollo-client'
+import { initializeApollo } from '@/api/apolloClient'
 import Post from '@/components/Post'
 import siteMetadata from '@/data/siteMetadata'
-import { IPostReportResponse } from '@/interfaces'
+import { IPostsResponse } from '@/interfaces'
 import POSTS from '@/queries/posts.graphql'
 
-export default function Home({ posts }: { posts: IPostReportResponse }) {
+export default function Home({ posts }: { posts: IPostsResponse }) {
   return (
     <>
       <Head>
@@ -24,9 +24,14 @@ export default function Home({ posts }: { posts: IPostReportResponse }) {
 }
 
 export async function getServerSideProps(): Promise<{
-  props: { posts: IPostReportResponse }
+  props: { posts: IPostsResponse }
 }> {
-  const { data } = await client.query({ query: POSTS })
+  const variables = {
+    first: 80,
+  }
+  const apolloClient = initializeApollo()
+  const { data } = await apolloClient.query({ query: POSTS, variables: variables })
+
   return {
     props: {
       posts: data || [],
