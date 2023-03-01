@@ -24,12 +24,6 @@ const Post = (props: { post: IPost }): JSX.Element => {
               </Link>
             </h2>
           </div>
-          <div className="prose max-w-none text-gray-500 line-clamp-3 dark:text-gray-400">
-            {post.body}
-          </div>
-          <div className="text-right text-sm text-gray-500 line-clamp-3 dark:text-gray-400">
-            {`publicado ${formatDate(post.publishedAt)}`}
-          </div>
           {post.imageUrl && (
             <Image
               src={post.imageUrl}
@@ -42,6 +36,12 @@ const Post = (props: { post: IPost }): JSX.Element => {
               }}
             />
           )}
+          <div className="prose max-w-none text-gray-500 line-clamp-3 dark:text-gray-400">
+            {post.body}
+          </div>
+          <div className="text-right text-sm text-gray-500 line-clamp-3 dark:text-gray-400">
+            {`publicado ${formatDate(post.publishedAt)}`}
+          </div>
           <div className="text-base font-medium leading-6">
             <Link
               href={post.link || '/'}
