@@ -26,6 +26,7 @@ const Post = (props: { post: IPost }): JSX.Element => {
           </div>
           {post.imageUrl && (
             <Image
+              className="aspect-[3/2] w-full rounded-2xl object-cover"
               src={post.imageUrl}
               alt="Ivaí.news Logo"
               width={300}
