@@ -15,7 +15,7 @@ const Post = (props: { post: IPost }): JSX.Element => {
           <div>
             <h2 className="text-2xl font-bold leading-8 tracking-tight">
               <Link
-                className=" visited:text-gray-300 hover:text-pink-700 active:text-pink-900"
+                className="visited:text-gray-500 dark:visited:text-gray-400"
                 href={post.link || '/'}
                 target="_blank"
                 aria-label={`Leia mais "${post.title}"`}
@@ -28,7 +28,7 @@ const Post = (props: { post: IPost }): JSX.Element => {
             <Image
               className="aspect-[3/2] w-full rounded-2xl object-cover"
               src={post.imageUrl}
-              alt="Ivaí.news Logo"
+              alt={post.title}
               width={300}
               height={300}
               style={{
@@ -47,7 +47,7 @@ const Post = (props: { post: IPost }): JSX.Element => {
             <Link
               href={post.link || '/'}
               target="_blank"
-              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+              className="text-primary-500 visited:text-gray-500 dark:visited:text-gray-400"
               aria-label={`Leia mais "${post.title}"`}
             >
               Leia mais no {post.contentSource.name} &rarr;

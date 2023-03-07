@@ -1,12 +1,14 @@
 import { ApolloError } from '@apollo/client'
 import { GetServerSidePropsContext } from 'next'
 import Head from 'next/head'
+import React, { useState } from 'react'
+import InfiniteScroll from 'react-infinite-scroll-component'
 
 import { initializeApollo } from '@/api/apolloClient'
 import Post from '@/components/Post'
 import siteMetadata from '@/data/siteMetadata'
 import { IPost } from '@/interfaces'
-import POSTS from '@/queries/posts.graphql'
+import GET_POSTS from '@/queries/posts.graphql'
 
 interface IPageInfo {
   startCursor: string
@@ -36,9 +38,9 @@ interface IPosts {
 
 interface IPostsVariables {
   first: number
-  after?: string
-  last?: number
-  before?: string
+  after?: string | null
+  last?: number | null
+  before?: string | null
 }
 
 interface IProps {
@@ -48,7 +50,7 @@ interface IProps {
 async function getPosts(variables: IPostsVariables): Promise<IPosts> {
   const apolloClient = initializeApollo()
   const { loading, error, data } = await apolloClient.query<IPostsResponse, IPostsVariables>({
-    query: POSTS,
+    query: GET_POSTS,
     variables: variables,
   })
   const posts = data.posts.edges?.map((edge) => edge.node) || []
@@ -60,7 +62,17 @@ async function getPosts(variables: IPostsVariables): Promise<IPosts> {
   }
 }
 
-const Home: React.FC<IPosts> = ({ posts }: IPosts): JSX.Element => {
+const Home: React.FC<IPosts> = (props: IPosts): JSX.Element => {
+  const [posts, setPosts] = useState(props.posts || [])
+  const [pageInfo, setPageInfo] = useState(props.pageInfo || [])
+
+  const getMorePosts = async () => {
+    const endCursor = pageInfo.endCursor || null
+    const postResponse = await getPosts({ first: 50, after: endCursor })
+    setPosts((post) => [...post, ...postResponse.posts])
+    setPageInfo(postResponse.pageInfo)
+  }
+
   return (
     <>
       <Head>
@@ -68,9 +80,18 @@ const Home: React.FC<IPosts> = ({ posts }: IPosts): JSX.Element => {
       </Head>
       <main>
         <div>
-          {posts.map((post) => (
-            <Post key={post.id} post={post} />
-          ))}
+          <InfiniteScroll
+            dataLength={posts.length}
+            next={getMorePosts}
+            hasMore={pageInfo.hasNextPage}
+            loader={<h3> Carregando mais...</h3>}
+            endMessage={<h4>Todas as notícias foram vistas</h4>}
+            style={{ overflow: 'hidden' }}
+          >
+            {posts.map((post) => (
+              <Post key={post.id} post={post} />
+            ))}
+          </InfiniteScroll>
         </div>
       </main>
     </>
@@ -79,7 +100,7 @@ const Home: React.FC<IPosts> = ({ posts }: IPosts): JSX.Element => {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function getServerSideProps(ctx: GetServerSidePropsContext): Promise<IProps> {
-  const postResponse = await getPosts({ first: 80 })
+  const postResponse = await getPosts({ first: 50 })
   return { props: postResponse } as IProps
 }
 

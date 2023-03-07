@@ -1,11 +1,9 @@
-# [Fastnews-UI](https://github.com/luciotbc/fastnews-ui)
-
 <p align="center">
   <a href="https://ivai.news">
-    <img src="./.github/logo-light.svg" alt="Fastnews UI" width="300">
+    <img src="./.github/logo-dark.svg" alt="Fastnews UI" width="150">
   </a>
   <a href="https://ivai.news">
-    <img src="./.github/logo-dark.svg" alt="Fastnews UI" width="300">
+    <img src="./.github/logo-light.svg" alt="Fastnews UI" width="150">
   </a>
 </p>
 <p align="center">
