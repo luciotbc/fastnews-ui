@@ -3,11 +3,13 @@ import Link from 'next/link'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 
+import siteMetadata from '@/data/siteMetadata'
+
 import ThemeSwitch from './ThemeSwitch'
 
 const Header: React.FC = () => {
   const [mounted, setMounted] = useState(false)
-  const { theme } = useTheme()
+  const { theme, resolvedTheme } = useTheme()
 
   useEffect(() => setMounted(true), [])
 
@@ -21,8 +23,8 @@ const Header: React.FC = () => {
           <div className="flex lg:hidden"></div>
         </div>
         <Link href="/" className="-m-1.5 p-1.5">
-          <span className="sr-only">Your Company</span>
-          {mounted && theme === 'dark' ? (
+          <span className="sr-only">{siteMetadata.headerTitle}</span>
+          {mounted && (theme === 'dark' || resolvedTheme === 'dark') ? (
             <Image
               src="/static/images/logo_white.png"
               alt="Ivaí.news Logo"
