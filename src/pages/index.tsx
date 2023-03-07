@@ -100,7 +100,7 @@ const Home: React.FC<IPosts> = (props: IPosts): JSX.Element => {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function getServerSideProps(ctx: GetServerSidePropsContext): Promise<IProps> {
-  const postResponse = await getPosts({ first: 50 })
+  const postResponse = await getPosts({ first: 20 })
   return { props: postResponse } as IProps
 }
 
