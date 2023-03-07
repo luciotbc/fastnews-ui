@@ -1,13 +1,24 @@
 import { ApolloClient, HttpLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client'
+import { offsetLimitPagination } from '@apollo/client/utilities'
 import { useMemo } from 'react'
 
 let apolloClient: ApolloClient<NormalizedCacheObject>
 
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        edges: offsetLimitPagination(),
+      },
+    },
+  },
+})
+
 function createApolloClient() {
   return new ApolloClient({
-    ssrMode: typeof window === 'undefined',
+    cache,
     link: new HttpLink({ uri: process.env.NEXT_PUBLIC_APP_URL }),
-    cache: new InMemoryCache(),
+    ssrMode: typeof window === 'undefined',
   })
 }
 
