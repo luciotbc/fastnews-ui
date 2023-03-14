@@ -20,6 +20,7 @@ const siteMetadata = {
   locale: 'pt-BR',
   analytics: {
     googleAnalyticsId: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID,
+    hotjarId: process.env.NEXT_PUBLIC_HOTJAR_ID,
   },
 }
 
