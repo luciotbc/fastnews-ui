@@ -1,11 +1,28 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState } from 'react'
 
 import { IPost } from '@/interfaces'
 import formatDate from '@/lib/utils/formatDate'
 
 const Post = (props: { post: IPost }): JSX.Element => {
   const { post } = props
+  const [readMore, setReadMore] = useState<boolean>(false)
+
+  let toggle
+  if (readMore) {
+    toggle = (
+      <Link href={'#'} onClick={() => setReadMore(false)} aria-label="Show less">
+        Show less
+      </Link>
+    )
+  } else {
+    toggle = (
+      <Link href={'#'} onClick={() => setReadMore(true)} aria-label="Read more">
+        Read more
+      </Link>
+    )
+  }
 
   if (!post) return <div />
   return (
@@ -37,21 +54,27 @@ const Post = (props: { post: IPost }): JSX.Element => {
               }}
             />
           )}
-          <div className="prose max-w-none text-gray-500 line-clamp-3 dark:text-gray-400">
-            {post.body}
+          <div
+            className={`prose max-w-none text-gray-500 dark:text-gray-400 ${
+              readMore ? 'line-clamp-none' : 'line-clamp-3'
+            }`}
+          >
+            {/* {post.body} */}
+            <div dangerouslySetInnerHTML={{ __html: post.bodyRaw }} />
           </div>
-          <div className="text-right text-sm text-gray-500 line-clamp-3 dark:text-gray-400">
+          <div className="text-right text-sm text-gray-500 dark:text-gray-400">
             {`publicado ${formatDate(post.publishedAt)}`}
           </div>
           <div className="text-base font-medium leading-6">
-            <Link
+            {/* <Link
               href={post.link || '/'}
               target="_blank"
               className="text-primary-500 visited:text-gray-500 dark:visited:text-gray-400"
               aria-label={`Leia mais "${post.title}"`}
             >
               Leia mais no {post.contentSource.name} &rarr;
-            </Link>
+            </Link> */}
+            {toggle}
           </div>
         </div>
       </div>
