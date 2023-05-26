@@ -26,6 +26,19 @@ const Post = (props: { post: IPost }): JSX.Element => {
               </Link>
             </h2>
           </div>
+          <div className="mt-0.5 grid grid-cols-2 text-sm">
+            <div className=" dark:text-gray-400">{`publicado ${formatDate(post.publishedAt)}`}</div>
+            <div className="text-right">
+              <Link
+                href={post.link || '/'}
+                target="_blank"
+                className=" visited:text-gray-500 dark:visited:text-gray-400"
+                aria-label={`Leia mais "${post.title}"`}
+              >
+                {post.contentSource.name}
+              </Link>
+            </div>
+          </div>
           {post.imageUrl && (
             <Image
               className="aspect-[3/2] w-full rounded-2xl object-cover"
@@ -46,23 +59,12 @@ const Post = (props: { post: IPost }): JSX.Element => {
           >
             {post.summary || post.body}
           </div>
-          {!readMore && (
-            <button onClick={() => setReadMore(true)} aria-label="Leia mais">
-              Ler mais
-            </button>
-          )}
-          <div className="mt-0.5 grid grid-cols-2 text-sm">
-            <div className=" dark:text-gray-400">{`publicado ${formatDate(post.publishedAt)}`}</div>
-            <div className="text-right ">
-              <Link
-                href={post.link || '/'}
-                target="_blank"
-                className=" visited:text-gray-500 dark:visited:text-gray-400"
-                aria-label={`Leia mais "${post.title}"`}
-              >
-                {post.contentSource.name}
-              </Link>
-            </div>
+          <div className="text-right text-sm">
+            {!readMore && (
+              <button onClick={() => setReadMore(true)} aria-label="Leia mais">
+                Ler mais
+              </button>
+            )}
           </div>
         </div>
       </div>
