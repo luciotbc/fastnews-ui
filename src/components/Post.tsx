@@ -9,15 +9,6 @@ const Post = (props: { post: IPost }): JSX.Element => {
   const { post } = props
   const [readMore, setReadMore] = useState<boolean>(false)
 
-  let toggle
-  if (!readMore) {
-    toggle = (
-      <Link href={'#'} onClick={() => setReadMore(true)} aria-label="Read more">
-        Ler mais
-      </Link>
-    )
-  }
-
   if (!post) return <div />
   return (
     <article key={`post-${post.id}-title`} aria-label={`post-${post.id}-title`}>
@@ -55,7 +46,11 @@ const Post = (props: { post: IPost }): JSX.Element => {
           >
             {post.summary || post.body}
           </div>
-          {toggle}
+          {!readMore && (
+            <button onClick={() => setReadMore(true)} aria-label="Leia mais">
+              Ler mais
+            </button>
+          )}
           <div className="mt-0.5 grid grid-cols-2 text-sm">
             <div className=" dark:text-gray-400">{`publicado ${formatDate(post.publishedAt)}`}</div>
             <div className="text-right ">
