@@ -4,7 +4,6 @@ fragment PostFragment on Post {
   id
   author
   body
-  bodyRaw
   link
   publishedAt
   summary

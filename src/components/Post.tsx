@@ -10,16 +10,10 @@ const Post = (props: { post: IPost }): JSX.Element => {
   const [readMore, setReadMore] = useState<boolean>(false)
 
   let toggle
-  if (readMore) {
-    toggle = (
-      <Link href={'#'} onClick={() => setReadMore(false)} aria-label="Show less">
-        Show less
-      </Link>
-    )
-  } else {
+  if (!readMore) {
     toggle = (
       <Link href={'#'} onClick={() => setReadMore(true)} aria-label="Read more">
-        Read more
+        Ler mais
       </Link>
     )
   }
@@ -59,22 +53,21 @@ const Post = (props: { post: IPost }): JSX.Element => {
               readMore ? 'line-clamp-none' : 'line-clamp-3'
             }`}
           >
-            {/* {post.body} */}
-            <div dangerouslySetInnerHTML={{ __html: post.bodyRaw }} />
+            {post.summary || post.body}
           </div>
-          <div className="text-right text-sm text-gray-500 dark:text-gray-400">
-            {`publicado ${formatDate(post.publishedAt)}`}
-          </div>
-          <div className="text-base font-medium leading-6">
-            {/* <Link
-              href={post.link || '/'}
-              target="_blank"
-              className="text-primary-500 visited:text-gray-500 dark:visited:text-gray-400"
-              aria-label={`Leia mais "${post.title}"`}
-            >
-              Leia mais no {post.contentSource.name} &rarr;
-            </Link> */}
-            {toggle}
+          {toggle}
+          <div className="mt-0.5 grid grid-cols-2 text-sm">
+            <div className=" dark:text-gray-400">{`publicado ${formatDate(post.publishedAt)}`}</div>
+            <div className="text-right ">
+              <Link
+                href={post.link || '/'}
+                target="_blank"
+                className=" visited:text-gray-500 dark:visited:text-gray-400"
+                aria-label={`Leia mais "${post.title}"`}
+              >
+                {post.contentSource.name}
+              </Link>
+            </div>
           </div>
         </div>
       </div>
