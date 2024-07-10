@@ -9,7 +9,7 @@ fragment PostFragment on Post {
   summary
   title
   imageUrl
-  contentSource{
+  contentSource {
     ...ContentSourceFragment
   }
 }
