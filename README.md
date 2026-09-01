@@ -13,8 +13,9 @@ This is the UI for the fastnews project a Hub of blogs and news.
 ## ⚠️ Project deactivated
 
 The portal and its GraphQL backend have been shut down. This repository now serves a single
-static page informing visitors that the service is no longer available. The news feed, Apollo
-client and GraphQL queries were removed — see git history for the last working version.
+static page (`index.html`) informing visitors that the service is no longer available. The
+Next.js application, the news feed, the Apollo client and the GraphQL queries were all removed —
+see the git history for the last working version.
 
 ## Status
 
@@ -28,22 +29,11 @@ client and GraphQL queries were removed — see git history for the last working
 
 ## Getting Started
 
-First, run the development server:
+There is no build step and no dependencies. Open `index.html` in a browser, or serve the
+repository root with any static server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+python3 -m http.server 3000
 ```
 
-### Dependencies
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-  - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [TailwindCSS](https://tailwindcss.com/docs/) - A utility-first CSS framework for rapidly building custom designs.
-  - [Tailwind UI](https://tailwindui.com/) - Beautifully designed, expertly crafted components and templates
-  - [heroicons](https://heroicons.com/)
-- [Typescript](https://www.typescriptlang.org/docs/) - TypeScript is a superset of JavaScript that compiles to clean
-- [React](https://reactjs.org/) - A JavaScript library for building user interfaces
+Netlify publishes the repository root as-is; see `netlify.toml`.

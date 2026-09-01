@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ivaí.news</title>
+    <meta name="description" content="O Ivaí.news foi desativado." />
+    <meta name="robots" content="noindex" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#171717" />
+    <meta name="msapplication-TileColor" content="#000000" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ivaí.news" />
+    <meta property="og:description" content="O Ivaí.news foi desativado." />
+    <meta property="og:url" content="https://ivai.news" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:image" content="https://ivai.news/static/images/logo.png" />
+
+    <link rel="icon" href="/static/favicons/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/favicons/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicons/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/favicons/apple-touch-icon.png" />
+    <link rel="mask-icon" href="/static/favicons/safari-pinned-tab.svg" color="#000000" />
+    <link rel="manifest" href="/static/favicons/site.webmanifest" />
+
+    <style>
+      :root {
+        --bg: #ffffff;
+        --fg: #111827;
+        --muted: #4b5563;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #171717;
+          --fg: #ffffff;
+          --muted: #9ca3af;
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2.5rem;
+        padding: 3rem 1.5rem;
+        background: var(--bg);
+        color: var(--fg);
+        font-family:
+          ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial,
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .logo {
+        width: 133px;
+        height: auto;
+      }
+
+      main {
+        max-width: 42rem;
+        text-align: center;
+      }
+
+      h1 {
+        margin: 0 0 1.5rem;
+        font-size: clamp(1.875rem, 5vw, 3rem);
+        font-weight: 700;
+        line-height: 1.15;
+      }
+
+      p {
+        margin: 0 0 1rem;
+        font-size: 1.125rem;
+        line-height: 1.6;
+        color: var(--muted);
+      }
+
+      footer {
+        font-size: 0.875rem;
+        color: var(--muted);
+        text-align: center;
+      }
+
+      footer a {
+        color: inherit;
+      }
+
+      .light-only {
+        display: block;
+      }
+
+      .dark-only {
+        display: none;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        .light-only {
+          display: none;
+        }
+
+        .dark-only {
+          display: block;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <img
+      class="logo light-only"
+      src="/static/images/logo.png"
+      alt="Ivaí.news"
+      width="133"
+      height="60"
+    />
+    <img
+      class="logo dark-only"
+      src="/static/images/logo_white.png"
+      alt="Ivaí.news"
+      width="133"
+      height="60"
+    />
+
+    <main>
+      <h1>O Ivaí.news foi desativado.</h1>
+      <p>
+        Encerramos as publicações e desligamos os serviços do portal. Nenhuma notícia nova será
+        publicada e a busca por conteúdo antigo não está mais disponível.
+      </p>
+      <p>Agradecemos a todos que acompanharam nosso trabalho.</p>
+    </main>
+
+    <footer>
+      <div>🄯 2026 • <a href="mailto:contato@ivai.news">contato@ivai.news</a></div>
+      <div>Feito com ❤️ ☕ 🍀 🤖</div>
+    </footer>
+  </body>
+</html>

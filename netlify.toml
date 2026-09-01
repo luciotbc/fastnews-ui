@@ -1,9 +1,4 @@
+# Static site: no build step, the repository root is published as-is.
 [build]
-  command = "yarn build"
-  publish = ".next"
-
-[build.environment]
-  # Node 20.19 is the lowest version the toolchain accepts: eslint-visitor-keys,
-  # brace-expansion and sharp all require >=20. Netlify's default (Node 22) also
-  # works — the pin exists only to keep local and CI on the same version.
-  NODE_VERSION = "20.19.5"
+  command = ""
+  publish = "."

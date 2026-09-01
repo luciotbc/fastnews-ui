@@ -2,52 +2,28 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Status: deactivated
+## What this is
 
-The Ivaí.news project and its GraphQL backend are shut down. This repo now ships a single static
-page (`src/pages/index.tsx`) telling visitors the service is off. All data-layer code (Apollo
-client, `.graphql` queries, `Post`, infinite scroll, date formatting) has been removed — do not
-reintroduce it; recover it from git history (`7a7256c^`) if the site is ever revived.
+The Ivaí.news portal and its GraphQL backend are shut down. This repository is now a single
+static page (`index.html`) telling visitors the service is off, plus the favicons and logos it
+references under `static/`.
 
-## Commands
+There is no build step, no package manager, no dependencies and no framework. Netlify publishes
+the repository root as-is (`netlify.toml`). To preview, open `index.html` in a browser or serve
+the directory with any static server.
 
-```bash
-yarn dev            # dev server on :3000
-yarn build          # next build
-yarn typecheck      # tsc --noEmit (non-incremental)
-yarn lint:strict    # eslint --max-warnings=0 src  (what pre-commit enforces)
-yarn lint:fix       # eslint --fix + prettier -w
-yarn format:check   # prettier -c .
-```
+## Conventions
 
-No test framework is configured. Husky pre-commit runs `lint-staged`
-(`eslint --max-warnings=0` + prettier); warnings are errors, so run `yarn lint:strict` before
-committing.
+- Content is pt-BR — user-facing strings in Portuguese.
+- All CSS is inlined in a single `<style>` block in `index.html`. Keep it that way: no external
+  stylesheet, no JavaScript, no web fonts (the page uses a system font stack).
+- Light/dark is pure `prefers-color-scheme` — CSS variables plus the `.light-only` / `.dark-only`
+  logo swap. There is no theme toggle, since that would require JavaScript.
+- Asset URLs are absolute and rooted at `/static/...`; `site.webmanifest` and
+  `browserconfig.xml` must use the same prefix.
 
-## Architecture
+## History
 
-Next.js 15 **Pages Router** + TypeScript + TailwindCSS, statically prerendered, deployed to
-Netlify (site `ivainews`, https://ivai.news). Content is pt-BR — user-facing strings in
-Portuguese.
-
-- `src/pages/_app.tsx` — `ThemeProvider` (next-themes, class strategy) → `Analytics` → `Layout`.
-- `src/data/siteMetadata.tsx` — single source for title, URLs, locale, social links, default
-  theme, analytics IDs. Read from it instead of hardcoding.
-- `src/components/analytics/` — GA + Hotjar, rendered only in production and only when
-  `NEXT_PUBLIC_GOOGLE_ANALYTICS_ID` / `NEXT_PUBLIC_HOTJAR_ID` are set. These are the only env
-  vars left.
-- Imports use the `@/*` alias for `src/*`. `simple-import-sort` enforces import order;
-  `@typescript-eslint/no-explicit-any` is an error.
-- Tailwind runs with no plugins — `prose`, `line-clamp`, `aspect-ratio` and `forms` classes are
-  no longer available.
-
-## Netlify build
-
-`netlify.toml` pins `NODE_VERSION = "20.19.5"` — the lowest version the toolchain accepts
-(`eslint-visitor-keys`, `brace-expansion` and `sharp` all require Node >=20). Do not lower it.
-
-The `@netlify/plugin-lighthouse` build plugin must stay **uninstalled** in the Netlify UI: it
-declares `engines: ">=14.15 <20"`, which cannot be satisfied together with the toolchain above.
-
-`package.json` has a `resolutions` entry forcing `postcss@^8.5.26` — Next pins a vulnerable
-8.4.31 transitively.
+The previous Next.js + TypeScript + TailwindCSS + Apollo application was removed in the commit
+that introduced `index.html`. Recover it from git history if the site is ever revived — do not
+try to reconstruct it.
