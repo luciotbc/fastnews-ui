@@ -7,7 +7,6 @@ const siteMetadata = {
   language: 'pt-br',
   theme: 'system', // system, dark or light
   siteUrl: 'https://ivai.news',
-  statusUrl: 'https://stats.uptimerobot.com/mjD7LTproA',
   siteRepo: 'https://github.com/luciotbc/fastnews-ui',
   siteLogo: '/static/images/logo.png',
   image: '/static/images/avatar.png',

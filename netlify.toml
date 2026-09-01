@@ -1,0 +1,8 @@
+[build]
+  command = "yarn build"
+  publish = ".next"
+
+[build.environment]
+  # Pinned because the Lighthouse build plugin declares engines ">=14.15 <20".
+  # Netlify's current default (Node 22) breaks the build.
+  NODE_VERSION = "18.20.4"

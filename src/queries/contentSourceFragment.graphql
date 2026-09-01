@@ -1,5 +1,0 @@
-fragment ContentSourceFragment on ContentSource {
-  name
-  url
-  bio
-}

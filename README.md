@@ -10,6 +10,12 @@
 This is the UI for the fastnews project a Hub of blogs and news.
 <p>
 
+## ⚠️ Project deactivated
+
+The portal and its GraphQL backend have been shut down. This repository now serves a single
+static page informing visitors that the service is no longer available. The news feed, Apollo
+client and GraphQL queries were removed — see git history for the last working version.
+
 ## Status
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/e0f0a0b6-d408-476f-ab50-5c357f4ce83a/deploy-status)](https://app.netlify.com/sites/ivainews/deploys)
@@ -19,10 +25,6 @@ This is the UI for the fastnews project a Hub of blogs and news.
 - Production:
   - [Primary domain](https://ivai.news)
   - [Netlify subdomain](https://ivainews.netlify.app)
-
-### Dashboard
-
-- [New relic dashboard\*](https://onenr.io/0qwyZeldARn)
 
 ## Getting Started
 
@@ -45,4 +47,3 @@ pnpm dev
   - [heroicons](https://heroicons.com/)
 - [Typescript](https://www.typescriptlang.org/docs/) - TypeScript is a superset of JavaScript that compiles to clean
 - [React](https://reactjs.org/) - A JavaScript library for building user interfaces
-- [date-fns](https://date-fns.org/) - Modern JavaScript date utility library
