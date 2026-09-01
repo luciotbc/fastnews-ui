@@ -8,9 +8,25 @@ The Ivaí.news portal and its GraphQL backend are shut down. This repository is 
 static page (`index.html`) telling visitors the service is off, plus the favicons and logos it
 references under `static/`.
 
-There is no build step, no package manager, no dependencies and no framework. Netlify publishes
-the repository root as-is (`netlify.toml`). To preview, open `index.html` in a browser or serve
-the directory with any static server.
+There is no build step, no package manager, no dependencies and no framework. To preview, open
+`index.html` in a browser or serve the directory with any static server.
+
+## Netlify
+
+`netlify.toml` is authoritative and overrides the UI build settings: a no-op build command,
+`publish = "."`, a catch-all `/*` → `/index.html` rewrite served with status 404 (so old article
+URLs show the notice and get de-indexed), security headers and a long cache for `/static/*`.
+
+Two things still have to be done in the Netlify UI, because `netlify.toml` cannot undo them:
+
+- Remove every UI-installed build plugin (`@netlify/plugin-lighthouse`, and the Next.js Runtime
+  if it was pinned manually). Plugins installed through the UI run regardless of this file and
+  will fail the deploy.
+- Clear the `NEXT_PUBLIC_*` environment variables — they are unused now.
+
+Since the repository root is published, `README.md` and `CLAUDE.md` are reachable as
+`/README.md` and `/CLAUDE.md`. Harmless for a public repo; move the site into a subdirectory and
+repoint `publish` if that ever matters.
 
 ## Conventions
 

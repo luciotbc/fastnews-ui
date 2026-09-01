@@ -1,4 +1,32 @@
-# Static site: no build step, the repository root is published as-is.
+# Static site: a single index.html plus the assets under static/.
+# There is no build step, no package.json and no Node runtime involved.
+#
+# These values override whatever is configured in the Netlify UI, so the old
+# Next.js settings (build command "yarn build", publish directory ".next") do
+# not need to be changed there — but see README/CLAUDE.md for the one thing
+# that must be removed in the UI: the build plugins.
+
 [build]
-  command = ""
+  # A no-op command: Netlify still runs the UI-configured command when this key
+  # is absent, and the old "yarn build" would fail now that the app is gone.
+  command = "echo 'Static site - nothing to build'"
   publish = "."
+
+# Any old URL (article permalinks, /about, ...) shows the shutdown notice
+# instead of Netlify's default 404 page.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 404
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
