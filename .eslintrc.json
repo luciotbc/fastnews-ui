@@ -14,7 +14,6 @@
     "plugin:prettier/recommended",
     "plugin:react-hooks/recommended",
     "plugin:react/recommended",
-    "plugin:security/recommended",
     "prettier"
   ],
   "rules": {
