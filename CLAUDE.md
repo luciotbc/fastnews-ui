@@ -43,9 +43,11 @@ Portuguese.
 
 ## Netlify build
 
-`netlify.toml` pins `NODE_VERSION = "18.20.4"`. Netlify's default (Node 22) breaks the build
-because the UI-installed `@netlify/plugin-lighthouse` declares `engines: ">=14.15 <20"`. If that
-plugin is removed in the Netlify UI, the pin (and `.tool-versions`) can move back to Node 20+.
+`netlify.toml` pins `NODE_VERSION = "20.19.5"` — the lowest version the toolchain accepts
+(`eslint-visitor-keys`, `brace-expansion` and `sharp` all require Node >=20). Do not lower it.
+
+The `@netlify/plugin-lighthouse` build plugin must stay **uninstalled** in the Netlify UI: it
+declares `engines: ">=14.15 <20"`, which cannot be satisfied together with the toolchain above.
 
 `package.json` has a `resolutions` entry forcing `postcss@^8.5.26` — Next pins a vulnerable
 8.4.31 transitively.

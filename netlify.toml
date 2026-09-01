@@ -3,6 +3,7 @@
   publish = ".next"
 
 [build.environment]
-  # Pinned because the Lighthouse build plugin declares engines ">=14.15 <20".
-  # Netlify's current default (Node 22) breaks the build.
-  NODE_VERSION = "18.20.4"
+  # Node 20.19 is the lowest version the toolchain accepts: eslint-visitor-keys,
+  # brace-expansion and sharp all require >=20. Netlify's default (Node 22) also
+  # works — the pin exists only to keep local and CI on the same version.
+  NODE_VERSION = "20.19.5"
